@@ -1,0 +1,34 @@
+@import '@/styles/variables';
+
+.input {
+    display: flex;
+    height: 2.5rem;
+    width: 100%;
+    border-radius: var(--radius);
+    border: 1px solid hsl(var(--input));
+    background-color: hsl(var(--background));
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    color: hsl(var(--foreground));
+
+    &::placeholder {
+        color: hsl(var(--muted-foreground));
+    }
+
+    &:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 2px hsl(var(--ring)), 0 0 0 4px hsl(var(--background));
+    }
+
+    &:disabled {
+        cursor: not-allowed;
+        opacity: 0.5;
+    }
+
+    &[type="file"] {
+        border: 0;
+        background: transparent;
+        font-size: 0.875rem;
+        font-weight: 500;
+    }
+}

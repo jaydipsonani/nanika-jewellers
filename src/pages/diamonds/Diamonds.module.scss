@@ -1,0 +1,101 @@
+@import '@/styles/variables';
+@import '@/styles/mixins';
+
+.page {
+    min-height: 100vh;
+    background-color: hsl(var(--background));
+}
+
+.main {
+    padding-top: 6rem;
+    padding-bottom: 5rem;
+
+    @include desktop {
+        padding-top: 7rem;
+    }
+}
+
+.container {
+    
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.subHeading {
+    color: hsl(var(--gold));
+    font-size: 0.875rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.heading {
+    font-family: var(--font-display);
+    font-size: 2.25rem;
+    font-weight: 600;
+    color: hsl(var(--foreground));
+    margin-bottom: 1rem;
+
+    @include desktop {
+        font-size: 3rem;
+    }
+}
+
+.description {
+    color: hsl(var(--muted-foreground));
+    font-size: 1.125rem;
+}
+
+.filtersContainer {
+    margin-bottom: 2.5rem;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+
+    @media (min-width: 640px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include desktop {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media (min-width: 1280px) {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.emptyState {
+    text-align: center;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+
+    svg {
+        width: 4rem;
+        height: 4rem;
+        color: hsl(var(--muted-foreground));
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 1.5rem;
+    }
+
+    h3 {
+        font-family: var(--font-display);
+        font-size: 1.5rem;
+        color: hsl(var(--foreground));
+        margin-bottom: 0.5rem;
+    }
+
+    p {
+        color: hsl(var(--muted-foreground));
+    }
+}

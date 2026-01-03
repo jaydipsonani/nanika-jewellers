@@ -1,0 +1,81 @@
+@import '@/styles/variables';
+@import '@/styles/mixins';
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    background-color: hsl(var(--background) / 0.8);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid hsl(var(--border) / 0.5);
+}
+
+.container {
+
+    padding-left: 1rem;
+    padding-right: 1rem;
+
+    @include desktop {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+}
+
+.navContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 4rem;
+
+    @include desktop {
+        height: 5rem;
+    }
+}
+
+.logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: 0.025em;
+    background: linear-gradient(to right, hsl(var(--gold)), hsl(var(--gold-light)));
+    -webkit-background-clip: text;
+    color: transparent;
+
+    @include desktop {
+        font-size: 1.5rem;
+    }
+}
+
+.navLinks {
+    display: none;
+
+    @include desktop {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+    }
+}
+
+.link {
+    font-size: 0.875rem;
+    color: hsl(var(--muted-foreground));
+    transition: color 0.3s;
+
+    &:hover {
+        color: hsl(var(--gold));
+    }
+}
+
+.spacer {
+    width: 5rem;
+    display: block;
+
+    @include desktop {
+        display: none;
+    }
+}

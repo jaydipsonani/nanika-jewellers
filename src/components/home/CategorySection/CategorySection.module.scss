@@ -1,0 +1,161 @@
+@import '@/styles/variables';
+@import '@/styles/mixins';
+
+.section {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    background: linear-gradient(to bottom, hsl(var(--background)), hsl(var(--card)));
+
+    @include desktop {
+        padding-top: 8rem;
+        padding-bottom: 8rem;
+    }
+}
+
+.container {
+    
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.subHeading {
+    color: hsl(var(--gold));
+    font-size: 0.875rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.heading {
+    font-family: var(--font-display);
+    font-size: 1.875rem;
+    font-weight: 600;
+    color: hsl(var(--foreground));
+
+    @include desktop {
+        font-size: 3rem;
+    }
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+
+    @include desktop {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+    }
+}
+
+.categoryCard {
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    aspect-ratio: 4/5;
+    display: block;
+}
+
+.bgImage {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s;
+
+    .categoryCard:hover & {
+        transform: scale(1.1);
+    }
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, hsl(var(--background)), hsla(var(--background), 0.4), transparent);
+    opacity: 0.8;
+    transition: opacity 0.5s;
+
+    .categoryCard:hover & {
+        opacity: 0.9;
+    }
+}
+
+.cardContent {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 2rem;
+    text-align: center;
+}
+
+.contentWrapper {
+    transition: transform 0.5s;
+
+    .categoryCard:hover & {
+        transform: translateY(-1rem);
+    }
+}
+
+.iconWrapper {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 9999px;
+    border: 1px solid hsl(var(--gold) / 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    margin-left: auto;
+    margin-right: auto;
+    transition: all 0.5s;
+
+    .categoryCard:hover & {
+        border-color: hsl(var(--gold));
+        background-color: hsl(var(--gold) / 0.1);
+    }
+
+    svg {
+        width: 1.75rem;
+        height: 1.75rem;
+        color: hsl(var(--gold));
+    }
+}
+
+.cardTitle {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: hsl(var(--foreground));
+    margin-bottom: 0.5rem;
+
+    @include desktop {
+        font-size: 1.875rem;
+    }
+}
+
+.cardDesc {
+    font-size: 0.875rem;
+    color: hsl(var(--muted-foreground));
+}
+
+.hoverBorder {
+    position: absolute;
+    inset: 0;
+    border: 1px solid transparent;
+    border-radius: 0.5rem;
+    transition: border-color 0.5s;
+
+    .categoryCard:hover & {
+        border-color: hsl(var(--gold) / 0.3);
+    }
+}

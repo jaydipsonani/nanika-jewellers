@@ -1,0 +1,39 @@
+@import '@/styles/variables';
+@import '@/styles/mixins';
+
+.page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: hsl(var(--background));
+}
+
+.container {
+    text-align: center;
+}
+
+.title {
+    font-family: var(--font-display);
+    font-size: 6rem;
+    /* 4xl -> ~2.25, 9xl? ~8rem. 404 matches size. */
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: hsl(var(--foreground));
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    /* xl */
+    margin-bottom: 1rem;
+    color: hsl(var(--foreground));
+}
+
+.link {
+    color: hsl(var(--gold));
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}

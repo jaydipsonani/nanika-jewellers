@@ -1,0 +1,159 @@
+@import '@/styles/variables';
+@import '@/styles/mixins';
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.labelWithIcon {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.grid3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+}
+
+.paymentCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    border-radius: var(--radius);
+    border: 1px solid hsl(var(--border));
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+        border-color: hsl(var(--gold) / 0.5);
+    }
+
+    &[data-active='true'] {
+        border-color: hsl(var(--gold));
+        background-color: hsl(var(--gold) / 0.1);
+    }
+}
+
+.paymentIcon {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: hsl(var(--gold));
+}
+
+.paymentText {
+    font-size: 0.75rem;
+    color: hsl(var(--foreground));
+}
+
+.gridGap4 {
+    display: grid;
+    gap: 1rem;
+}
+
+.gridGap2 {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.inputWrapper {
+    position: relative;
+
+    svg {
+        position: absolute;
+        left: 0.75rem;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 1rem;
+        height: 1rem;
+        color: hsl(var(--muted-foreground));
+    }
+}
+
+.inputWithIcon {
+    padding-left: 2.5rem;
+    background-color: hsl(var(--secondary));
+    border-color: hsl(var(--border));
+}
+
+.inputNormal {
+    background-color: hsl(var(--secondary));
+    border-color: hsl(var(--border));
+}
+
+.grid2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.summary {
+    background-color: hsl(var(--secondary));
+    border-radius: var(--radius);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.summaryRow {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.875rem;
+
+    .label {
+        color: hsl(var(--muted-foreground));
+    }
+
+    .value {
+        color: hsl(var(--foreground));
+    }
+
+    .free {
+        color: rgb(34 197 94);
+    }
+
+    /* green-500 */
+}
+
+.totalRow {
+    border-top: 1px solid hsl(var(--border));
+    padding-top: 0.5rem;
+    margin-top: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+
+    .totalValue {
+        color: hsl(var(--gold));
+    }
+}
+
+.dialogTitle {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    color: hsl(var(--foreground));
+}
+
+.dialogContent {
+    background-color: hsl(var(--card));
+    border-color: hsl(var(--border));
+    max-height: 90vh;
+    overflow-y: auto;
+
+    @include mobile {
+        max-width: 500px;
+    }
+}
