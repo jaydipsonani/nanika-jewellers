@@ -4,21 +4,12 @@ import { User, LogOut } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import styles from "./Header.module.scss";
 import { useAuth } from "@/context/AuthContext";
-import UserMenu from "@/components/auth/UserMenu";
+import UserMenu from "@/components/auth/userMenu";
 
 const Header = () => {
     const { user, loading, signOut, signInWithGoogle }: any = useAuth();
     const navigate = useNavigate();
     const { toast } = useToast();
-
-    const handleSignOut = async () => {
-        await signOut();
-        toast({
-            title: "Signed out",
-            description: "You have been signed out successfully.",
-        });
-        navigate("/");
-    };
 
     return (
         <header className={styles.header}>
@@ -27,10 +18,7 @@ const Header = () => {
                     {!loading && (
                         <>
                             {user ? (
-                                <Button variant="gold-outline" size="sm" className="gap-2" onClick={handleSignOut}>
-                                    <LogOut className="w-4 h-4" />
-                                    Sign Out
-                                </Button>
+                                <UserMenu />
                             ) : (
                                 <Button
                                     variant="gold-outline"
