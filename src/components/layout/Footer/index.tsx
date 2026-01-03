@@ -34,7 +34,7 @@ const Footer = () => {
                     </nav>
 
                     <p className={styles.copyright}>
-                        © 2024 Nanika Jewellers. All rights reserved.
+                        © {new Date().getFullYear()} Nanika Jewellers. All rights reserved.
                     </p>
                 </div>
             </div>
