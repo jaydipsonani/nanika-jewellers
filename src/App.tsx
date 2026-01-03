@@ -9,25 +9,28 @@ import Diamonds from "./pages/diamonds";
 import Jewellery from "./pages/Jewellery";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
+import { AuthProvider } from "./context/AuthContext";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <ScrollToTop />
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/diamonds" element={<Diamonds />} />
-          <Route path="/jewellery" element={<Jewellery />} />
-          <Route path="/auth" element={<Auth />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
+    <AuthProvider>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <ScrollToTop />
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/diamonds" element={<Diamonds />} />
+            <Route path="/jewellery" element={<Jewellery />} />
+            <Route path="/auth" element={<Auth />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </AuthProvider>
   </QueryClientProvider>
 );
 

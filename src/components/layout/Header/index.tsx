@@ -1,12 +1,13 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/Button";
 import { User, LogOut } from "lucide-react";
-import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 import styles from "./Header.module.scss";
+import { useAuth } from "@/context/AuthContext";
+import UserMenu from "@/components/auth/UserMenu";
 
 const Header = () => {
-    const { user, loading, signOut } = useAuth();
+    const { user, loading, signOut, signInWithGoogle }: any = useAuth();
     const navigate = useNavigate();
     const { toast } = useToast();
 

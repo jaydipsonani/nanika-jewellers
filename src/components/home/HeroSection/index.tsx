@@ -63,6 +63,7 @@ const HeroSection = () => {
                             View Diamonds
                         </Button>
                     </Link>
+
                 </div>
 
                 {/* Scroll Indicator */}

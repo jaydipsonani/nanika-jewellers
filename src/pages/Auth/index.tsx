@@ -1,151 +1,31 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Label } from "@/components/ui/Label";
-import { useToast } from "@/hooks/use-toast";
 import { Mail, Lock, User, ArrowLeft } from "lucide-react";
-import { z } from "zod";
 import styles from "./Auth.module.scss";
-
-const emailSchema = z.string().email("Please enter a valid email address");
-const passwordSchema = z.string().min(6, "Password must be at least 6 characters");
+import { useAuth } from "@/context/AuthContext";
 
 const Auth = () => {
     const [isSignUp, setIsSignUp] = useState(false);
+    // Placeholder states for form (not functional yet with Firebase Email/Pass)
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [fullName, setFullName] = useState("");
-    const [loading, setLoading] = useState(false);
-    const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
+
     const navigate = useNavigate();
-    const { toast } = useToast();
+    const { signInWithGoogle, user, loading } = useAuth();
 
     useEffect(() => {
-        const { data: { subscription } } = supabase.auth.onAuthStateChange(
-            (event, session) => {
-                if (session?.user) {
-                    navigate("/");
-                }
-            }
-        );
-
-        supabase.auth.getSession().then(({ data: { session } }) => {
-            if (session?.user) {
-                navigate("/");
-            }
-        });
-
-        return () => subscription.unsubscribe();
-    }, [navigate]);
-
-    const validateForm = () => {
-        const newErrors: { email?: string; password?: string } = {};
-
-        const emailResult = emailSchema.safeParse(email);
-        if (!emailResult.success) {
-            newErrors.email = emailResult.error.errors[0].message;
+        if (!loading && user) {
+            navigate("/");
         }
-
-        const passwordResult = passwordSchema.safeParse(password);
-        if (!passwordResult.success) {
-            newErrors.password = passwordResult.error.errors[0].message;
-        }
-
-        setErrors(newErrors);
-        return Object.keys(newErrors).length === 0;
-    };
-
-    const handleEmailAuth = async (e: React.FormEvent) => {
-        e.preventDefault();
-
-        if (!validateForm()) return;
-
-        setLoading(true);
-
-        try {
-            if (isSignUp) {
-                const { error } = await supabase.auth.signUp({
-                    email,
-                    password,
-                    options: {
-                        emailRedirectTo: `${window.location.origin}/`,
-                        data: {
-                            full_name: fullName,
-                        },
-                    },
-                });
-
-                if (error) {
-                    if (error.message.includes("already registered")) {
-                        toast({
-                            title: "Account exists",
-                            description: "This email is already registered. Please sign in instead.",
-                            variant: "destructive",
-                        });
-                    } else {
-                        throw error;
-                    }
-                } else {
-                    toast({
-                        title: "Account created!",
-                        description: "Welcome to Nanika Jewellers.",
-                    });
-                }
-            } else {
-                const { error } = await supabase.auth.signInWithPassword({
-                    email,
-                    password,
-                });
-
-                if (error) {
-                    if (error.message.includes("Invalid login credentials")) {
-                        toast({
-                            title: "Invalid credentials",
-                            description: "Please check your email and password.",
-                            variant: "destructive",
-                        });
-                    } else {
-                        throw error;
-                    }
-                } else {
-                    toast({
-                        title: "Welcome back!",
-                        description: "You have successfully signed in.",
-                    });
-                }
-            }
-        } catch (error: any) {
-            toast({
-                title: "Error",
-                description: error.message || "An error occurred. Please try again.",
-                variant: "destructive",
-            });
-        } finally {
-            setLoading(false);
-        }
-    };
+    }, [user, loading, navigate]);
 
     const handleGoogleAuth = async () => {
-        setLoading(true);
-        try {
-            const { error } = await supabase.auth.signInWithOAuth({
-                provider: "google",
-                options: {
-                    redirectTo: `${window.location.origin}/`,
-                },
-            });
-
-            if (error) throw error;
-        } catch (error: any) {
-            toast({
-                title: "Error",
-                description: error.message || "Failed to sign in with Google.",
-                variant: "destructive",
-            });
-            setLoading(false);
-        }
+        await signInWithGoogle();
+        // Navigation handled by useEffect
     };
 
     return (
@@ -174,7 +54,7 @@ const Auth = () => {
                         </p>
                     </div>
 
-                    <form onSubmit={handleEmailAuth} className={styles.form}>
+                    <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
                         {isSignUp && (
                             <div className={styles.formGroup}>
                                 <Label htmlFor="fullName" className={styles.label}>
@@ -205,16 +85,10 @@ const Auth = () => {
                                     type="email"
                                     placeholder="Enter your email"
                                     value={email}
-                                    onChange={(e) => {
-                                        setEmail(e.target.value);
-                                        setErrors((prev) => ({ ...prev, email: undefined }));
-                                    }}
+                                    onChange={(e) => setEmail(e.target.value)}
                                     className={styles.input}
                                 />
                             </div>
-                            {errors.email && (
-                                <p className={styles.error}>{errors.email}</p>
-                            )}
                         </div>
 
                         <div className={styles.formGroup}>
@@ -228,25 +102,19 @@ const Auth = () => {
                                     type="password"
                                     placeholder="Enter your password"
                                     value={password}
-                                    onChange={(e) => {
-                                        setPassword(e.target.value);
-                                        setErrors((prev) => ({ ...prev, password: undefined }));
-                                    }}
+                                    onChange={(e) => setPassword(e.target.value)}
                                     className={styles.input}
                                 />
                             </div>
-                            {errors.password && (
-                                <p className={styles.error}>{errors.password}</p>
-                            )}
                         </div>
 
                         <Button
-                            type="submit"
+                            type="button"
                             variant="gold"
                             className={styles.submitButton}
-                            disabled={loading}
+                            disabled={true}
                         >
-                            {loading ? "Please wait..." : isSignUp ? "Create Account" : "Sign In"}
+                            Email Login Coming Soon
                         </Button>
                     </form>
 
@@ -295,7 +163,6 @@ const Auth = () => {
                             type="button"
                             onClick={() => {
                                 setIsSignUp(!isSignUp);
-                                setErrors({});
                             }}
                         >
                             {isSignUp ? "Sign In" : "Sign Up"}
