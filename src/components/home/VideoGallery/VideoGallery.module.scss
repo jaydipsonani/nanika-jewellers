@@ -1,0 +1,153 @@
+@import '@/styles/variables';
+@import '@/styles/mixins';
+
+.section {
+    padding: 5rem 0;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(to bottom, hsl(var(--background)), hsla(var(--gold), 0.05));
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+
+    @include desktop {
+        padding: 0 3rem;
+    }
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.subHeading {
+    font-family: var(--font-sans);
+    color: hsl(var(--gold));
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.heading {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    color: hsl(var(--foreground));
+    font-weight: 500;
+
+    @include desktop {
+        font-size: 3.5rem;
+    }
+}
+
+.sliderWrapper {
+    margin: 0 -0.5rem;
+
+    // React Slick Overrides
+    :global(.slick-prev),
+    :global(.slick-next) {
+        z-index: 20;
+        width: 3rem;
+        height: 3rem;
+        border-radius: 50%;
+        background: hsla(240, 5%, 8%, 0.8);
+        border: 1px solid hsl(var(--gold) / 0.3);
+        transition: all 0.3s ease;
+
+        &::before {
+            color: hsl(var(--gold));
+            font-size: 1.5rem;
+            opacity: 1;
+        }
+
+        &:hover {
+            background: hsl(var(--gold));
+            border-color: hsl(var(--gold));
+
+            &::before {
+                color: hsl(var(--background));
+            }
+        }
+    }
+
+    :global(.slick-prev) {
+        left: -1rem;
+
+        @include desktop {
+            left: -3rem;
+        }
+    }
+
+    :global(.slick-next) {
+        right: -1rem;
+
+        @include desktop {
+            right: -3rem;
+        }
+    }
+}
+
+.slideItem {
+    outline: none;
+    padding: 0 0.5rem;
+}
+
+.videoLink {
+    display: block;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+
+    &:hover {
+        .playOverlay {
+            opacity: 1;
+        }
+
+        .playButton {
+            transform: scale(1.1);
+        }
+    }
+}
+
+.playerWrapper {
+    position: relative;
+    aspect-ratio: 9/16;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border: 1px solid hsl(var(--border));
+}
+
+.playOverlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 5;
+}
+
+.playButton {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    background: hsl(var(--gold));
+    color: hsl(var(--background));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 0 20px hsl(var(--gold) / 0.5);
+
+    svg {
+        width: 1.5rem;
+        height: 1.5rem;
+        margin-left: 0.25rem; // Visual center adjustment for play icon
+    }
+}

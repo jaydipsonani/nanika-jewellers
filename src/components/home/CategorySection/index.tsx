@@ -3,13 +3,13 @@ import { Play, Diamond, Gem } from "lucide-react";
 import styles from "./CategorySection.module.scss";
 
 const categories = [
-    {
-        title: "Video",
-        description: "Watch our story",
-        icon: Play,
-        href: "#video",
-        image: "https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=600&q=80",
-    },
+    // {
+    //     title: "Video",
+    //     description: "Watch our story",
+    //     icon: Play,
+    //     href: "#video-gallery",
+    //     image: "https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=600&q=80",
+    // },
     {
         title: "Diamonds",
         description: "Natural & Lab Grown",
@@ -40,43 +40,61 @@ const CategorySection = () => {
                 </div>
 
                 <div className={styles.grid}>
-                    {categories.map((category, index) => (
-                        <Link
-                            key={category.title}
-                            to={category.href}
-                            className={`${styles.categoryCard} animate-fade-in-up`}
-                            style={{ animationDelay: `${index * 0.2}s` }}
-                        >
-                            {/* Background Image */}
-                            <img
-                                src={category.image}
-                                alt={category.title}
-                                className={styles.bgImage}
-                                loading="lazy"
-                            />
-
-                            {/* Overlay */}
-                            <div className={styles.overlay} />
-
-                            {/* Content */}
-                            <div className={styles.cardContent}>
-                                <div className={styles.contentWrapper}>
-                                    <div className={styles.iconWrapper}>
-                                        <category.icon />
+                    {categories.map((category, index) => {
+                        const isHashLink = category.href.startsWith("#");
+                        const cardContent = (
+                            <>
+                                <img
+                                    src={category.image}
+                                    alt={category.title}
+                                    className={styles.bgImage}
+                                    loading="lazy"
+                                />
+                                <div className={styles.overlay} />
+                                <div className={styles.cardContent}>
+                                    <div className={styles.contentWrapper}>
+                                        <div className={styles.iconWrapper}>
+                                            <category.icon />
+                                        </div>
+                                        <h3 className={styles.cardTitle}>
+                                            {category.title}
+                                        </h3>
+                                        <p className={styles.cardDesc}>
+                                            {category.description}
+                                        </p>
                                     </div>
-                                    <h3 className={styles.cardTitle}>
-                                        {category.title}
-                                    </h3>
-                                    <p className={styles.cardDesc}>
-                                        {category.description}
-                                    </p>
                                 </div>
-                            </div>
+                                <div className={styles.hoverBorder} />
+                            </>
+                        );
 
-                            {/* Hover Border Effect */}
-                            <div className={styles.hoverBorder} />
-                        </Link>
-                    ))}
+                        const className = `${styles.categoryCard} animate-fade-in-up`;
+                        const style = { animationDelay: `${index * 0.2}s` };
+
+                        if (isHashLink) {
+                            return (
+                                <a
+                                    key={category.title}
+                                    href={category.href}
+                                    className={className}
+                                    style={style}
+                                >
+                                    {cardContent}
+                                </a>
+                            );
+                        }
+
+                        return (
+                            <Link
+                                key={category.title}
+                                to={category.href}
+                                className={className}
+                                style={style}
+                            >
+                                {cardContent}
+                            </Link>
+                        );
+                    })}
                 </div>
             </div>
         </section>

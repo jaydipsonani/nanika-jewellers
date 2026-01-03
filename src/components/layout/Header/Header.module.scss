@@ -39,12 +39,15 @@
     left: 50%;
     transform: translateX(-50%);
     font-family: var(--font-display);
-    font-size: 1.25rem;
+    font-size: 1.125rem; // Slightly smaller on mobile to prevent overlap
     font-weight: 600;
     letter-spacing: 0.025em;
     background: linear-gradient(to right, hsl(var(--gold)), hsl(var(--gold-light)));
     -webkit-background-clip: text;
     color: transparent;
+    white-space: nowrap; // Prevent wrapping
+    z-index: 10;
+    width: max-content;
 
     @include desktop {
         font-size: 1.5rem;

@@ -46,9 +46,7 @@ const Header = () => {
                     {loading && <div className="w-20" />}
 
                     <Link to="/" className={styles.logo}>
-                        <h1>
-                            Nanika Jewellers
-                        </h1>
+                        Nanika Jewellers
                     </Link>
 
                     <nav className={styles.navLinks}>

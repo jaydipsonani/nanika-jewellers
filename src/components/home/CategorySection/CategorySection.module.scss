@@ -14,9 +14,7 @@
     }
 }
 
-.container {
-    
-}
+.container {}
 
 .header {
     text-align: center;
@@ -45,13 +43,9 @@
 
 .grid {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
 
-    @include desktop {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 2rem;
-    }
 }
 
 .categoryCard {
