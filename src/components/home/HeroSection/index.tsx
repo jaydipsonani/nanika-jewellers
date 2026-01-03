@@ -29,7 +29,7 @@ const HeroSection = () => {
             <div className={styles.contentContainer}>
                 <div className="animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
                     <span className={styles.yearLabel}>
-                        Est. 1985
+                        Est. 2024
                     </span>
                 </div>
 
@@ -59,7 +59,7 @@ const HeroSection = () => {
                         </Button>
                     </Link>
                     <Link to="/diamonds">
-                        <Button variant="hero" size="xl">
+                        <Button variant="gold" size="xl">
                             View Diamonds
                         </Button>
                     </Link>

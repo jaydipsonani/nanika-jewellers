@@ -2,14 +2,12 @@
 @import '@/styles/mixins';
 
 .section {
-    padding-top: 5rem;
     padding-bottom: 5rem;
     padding-left: 1rem;
     padding-right: 1rem;
     background-color: hsl(var(--card));
 
     @include desktop {
-        padding-top: 8rem;
         padding-bottom: 8rem;
     }
 }
