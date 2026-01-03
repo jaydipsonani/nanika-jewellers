@@ -3,6 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/Sonner";
 import { TooltipProvider } from "@/components/ui/Tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ScrollToTop from "./components/layout/ScrollToTop";
 import Index from "./pages/Index";
 import Diamonds from "./pages/diamonds";
 import Jewellery from "./pages/Jewellery";
@@ -17,6 +18,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/diamonds" element={<Diamonds />} />
