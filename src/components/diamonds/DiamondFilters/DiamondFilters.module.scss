@@ -21,3 +21,18 @@
     color: hsl(var(--muted-foreground));
     margin-bottom: 0.5rem;
 }
+
+.filterGroup {
+    width: 100%;
+}
+
+.selectTrigger {
+    width: 100%;
+    background-color: hsl(var(--secondary));
+    border-color: hsl(var(--border));
+}
+
+.selectContent {
+    width: var(--radix-select-trigger-width);
+    max-height: var(--radix-select-content-available-height);
+}

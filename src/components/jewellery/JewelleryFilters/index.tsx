@@ -59,15 +59,15 @@ const JewelleryFilters = ({
 }: JewelleryFiltersProps) => {
     return (
         <div className={styles.filters}>
-            <div>
+            <div className={styles.filterGroup}>
                 <label className={styles.label}>
                     Category
                 </label>
                 <Select value={category} onValueChange={onCategoryChange}>
-                    <SelectTrigger className="w-full bg-secondary border-border">
+                    <SelectTrigger className={styles.selectTrigger}>
                         <SelectValue placeholder="Select category" />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className={styles.selectContent} position="popper">
                         {categories.map((cat) => (
                             <SelectItem
                                 key={cat.value}
@@ -80,15 +80,15 @@ const JewelleryFilters = ({
                 </Select>
             </div>
 
-            <div>
+            <div className={styles.filterGroup}>
                 <label className={styles.label}>
                     Gender
                 </label>
                 <Select value={gender} onValueChange={onGenderChange}>
-                    <SelectTrigger className="w-full bg-secondary border-border">
+                    <SelectTrigger className={styles.selectTrigger}>
                         <SelectValue placeholder="Select gender" />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className={styles.selectContent} position="popper">
                         {genders.map((g) => (
                             <SelectItem
                                 key={g.value}
@@ -101,15 +101,15 @@ const JewelleryFilters = ({
                 </Select>
             </div>
 
-            <div>
+            <div className={styles.filterGroup}>
                 <label className={styles.label}>
                     Material
                 </label>
                 <Select value={material} onValueChange={onMaterialChange}>
-                    <SelectTrigger className="w-full bg-secondary border-border">
+                    <SelectTrigger className={styles.selectTrigger}>
                         <SelectValue placeholder="Select material" />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className={styles.selectContent} position="popper">
                         {materials.map((mat) => (
                             <SelectItem
                                 key={mat.value}
@@ -122,15 +122,15 @@ const JewelleryFilters = ({
                 </Select>
             </div>
 
-            <div>
+            <div className={styles.filterGroup}>
                 <label className={styles.label}>
                     Occasion
                 </label>
                 <Select value={occasion} onValueChange={onOccasionChange}>
-                    <SelectTrigger className="w-full bg-secondary border-border">
+                    <SelectTrigger className={styles.selectTrigger}>
                         <SelectValue placeholder="Select occasion" />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className={styles.selectContent} position="popper">
                         {occasions.map((occ) => (
                             <SelectItem
                                 key={occ.value}

@@ -42,10 +42,10 @@ const DiamondFilters = ({
                     Diamond Type
                 </label>
                 <Select value={diamondType} onValueChange={onDiamondTypeChange}>
-                    <SelectTrigger className="w-full bg-secondary border-border">
+                    <SelectTrigger className={styles.selectTrigger}>
                         <SelectValue placeholder="Select type" />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className={styles.selectContent} position="popper">
                         {diamondTypes.map((type) => (
                             <SelectItem
                                 key={type.value}
@@ -63,10 +63,10 @@ const DiamondFilters = ({
                     Cut Type
                 </label>
                 <Select value={cutType} onValueChange={onCutTypeChange}>
-                    <SelectTrigger className="w-full bg-secondary border-border">
+                    <SelectTrigger className={styles.selectTrigger}>
                         <SelectValue placeholder="Select cut" />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className={styles.selectContent} position="popper">
                         {cutTypes.map((cut) => (
                             <SelectItem
                                 key={cut.value}
